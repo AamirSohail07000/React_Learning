@@ -14,19 +14,20 @@
       function ChatInput() {
         return (
           <>
-            <input 
-              placeholder="Send a message to chatbot" 
-              size="30" 
+            <input
+              placeholder="Send a message to Chatbot"
+              size="30"
             />
             <button>Send</button>
           </>
         );
       }
 
-      function ChatMessage({message, sender}) {
+      function ChatMessage({ message, sender }) {
         // const message = props.message;
         // const sender = props.sender;
-        // const {message, sender} = props; // Destructuring, deconstructing
+        // const { message, sender } = props;
+
         /*
         if (sender === 'robot') {
           return (
@@ -34,47 +35,84 @@
               <img src="robot.png" width="50" />
               {message}
             </div>
-
           );
         }
-        */    
+        */
 
         return (
           <div>
-            {sender === 'robot' && (                 //Guard operator &&
+            {sender === 'robot' && (
               <img src="robot.png" width="50" />
             )}
-            {message}            
+            {message}
             {sender === 'user' && (
               <img src="user.png" width="50" />
             )}
           </div>
         );
       }
-        function App() {
-          return (
-            <>
-              <ChatInput />
-              <ChatMessage 
-                message="hello chatbot" 
-                sender="user" 
-              />
-              <ChatMessage 
-                message="Hello! How can I help you?" 
-                sender="robot" 
-              />
-              <ChatMessage 
-                message="can you get me todays date ?" 
-                sender="user" 
-              />
-              <ChatMessage 
-                message="today is september 27" 
-                sender="robot" 
-              />
-            </>
 
-          );
+      function ChatMessages(){
+        const array = React.useState([{
+          message: 'hello chatbot',
+          sender: 'user',
+          id : 'id1'
+        }, {
+          message: 'Hello! How can I help you?',
+          sender: 'robot',
+          id : 'id2'
+        }, {
+          message: 'can you get me todays date?',
+          sender: 'user',
+          id : 'id3'
+        }, {
+          message: 'Today is September 27',
+          sender: 'robot',
+          id : 'id4'
+        }])
+        const [chatMessages, setChatMessage] = array
+        //const chatMessages = array[0]; //Give current data
+        //const setChatMessage = array[1]; // updater function
+
+        function sendMessage(){
+          setChatMessage([
+            ...chatMessages,   //Spread operator
+            {
+              message: 'test',
+              sender: 'user',
+              id: crypto.randomUUID()
+            }
+          ]);
         }
+
+        return(
+          <>
+            <button onClick={sendMessage}>Send message</button>
+
+            {chatMessages.map((chatMessage)=> {
+              return(
+                <ChatMessage
+                  message = {chatMessage.message}
+                  sender = {chatMessage.sender}
+                  key = {chatMessage.id}
+                />
+              );
+
+            })}
+          </>
+        );  
+
+      }
+
+      function App() {
+        return (
+          <>
+            <ChatInput />
+            <ChatMessages />
+            
+          </>
+        );
+      }
 
       const container = document.querySelector('.js-container');
       ReactDOM.createRoot(container).render(<App />);
