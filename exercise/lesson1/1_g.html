@@ -5,25 +5,18 @@
   </head>
   <body>
     <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"> </script>
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      const shippingCost = 5
-      const productCost = 10 + 8 * 2
-      const div = (
-        <div>
-          <button>Product cost: ${productCost}</button>
-          <p>Shipping cost: ${shippingCost}</p>
-          <p>Total cost: ${shippingCost + productCost}</p>
-          <button>Place your order</button>
-        </div>
-      );
+      
+      console.log(dayjs().format('MMMM D'))
 
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render();
     </script>
   </body>
 </html>
