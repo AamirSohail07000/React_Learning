@@ -11,19 +11,10 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      const shippingCost = 5
-      const productCost = 10 + 8 * 2
-      const div = (
-        <div>
-          <button>Product cost: ${productCost}</button>
-          <p>Shipping cost: ${shippingCost}</p>
-          <p>Total cost: ${shippingCost + productCost}</p>
-          <button>Place your order</button>
-        </div>
-      );
-
+      const productCost = 10 + 8 * 2;
+      const paragraph = <p>Product cost: $ {productCost}</p>     
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(paragraph);
     </script>
   </body>
 </html>
