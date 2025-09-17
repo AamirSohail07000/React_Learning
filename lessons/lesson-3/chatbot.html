@@ -11,14 +11,40 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      function ChatInput() {
+
+      function ChatInput({ chatMessages, setChatMessages }) {
+        const [inputText, setInputText] = React.useState('');
+
+        function saveInputTest(event) {
+          setInputText(event.target.value);
+
+        }
+
+        function sendMessage(){
+          setChatMessages([
+            ...chatMessages,   //Spread operator
+            {
+              message: inputText,
+              sender: 'user',
+              id: crypto.randomUUID()
+            }
+          ]);
+
+          setInputText(''); // Remove text in the textbox
+
+        }
+
         return (
           <>
             <input
               placeholder="Send a message to Chatbot"
               size="30"
+              onChange = {saveInputTest}
+              value = {inputText}
             />
-            <button>Send</button>
+            <button
+              onClick={sendMessage}
+            >Send</button>
           </>
         );
       }
@@ -52,43 +78,9 @@
         );
       }
 
-      function ChatMessages(){
-        const array = React.useState([{
-          message: 'hello chatbot',
-          sender: 'user',
-          id : 'id1'
-        }, {
-          message: 'Hello! How can I help you?',
-          sender: 'robot',
-          id : 'id2'
-        }, {
-          message: 'can you get me todays date?',
-          sender: 'user',
-          id : 'id3'
-        }, {
-          message: 'Today is September 27',
-          sender: 'robot',
-          id : 'id4'
-        }])
-        const [chatMessages, setChatMessage] = array
-        //const chatMessages = array[0]; //Give current data
-        //const setChatMessage = array[1]; // updater function
-
-        function sendMessage(){
-          setChatMessage([
-            ...chatMessages,   //Spread operator
-            {
-              message: 'test',
-              sender: 'user',
-              id: crypto.randomUUID()
-            }
-          ]);
-        }
-
+      function ChatMessages({chatMessages}){
         return(
           <>
-            <button onClick={sendMessage}>Send message</button>
-
             {chatMessages.map((chatMessage)=> {
               return(
                 <ChatMessage
@@ -105,10 +97,37 @@
       }
 
       function App() {
+        // lift state up
+        const [chatMessages, setChatMessages] = React.useState([{ 
+          message: 'hello chatbot',
+          sender: 'user',
+          id : 'id1'
+        }, {
+          message: 'Hello! How can I help you?',
+          sender: 'robot',
+          id : 'id2'
+        }, {
+          message: 'can you get me todays date?',
+          sender: 'user',
+          id : 'id3'
+        }, {
+          message: 'Today is September 27',
+          sender: 'robot',
+          id : 'id4'
+        }])
+        // const [chatMessages, setChatMessage] = array
+        //const chatMessages = array[0]; //Give current data
+        //const setChatMessage = array[1]; // updater function
+
         return (
           <>
-            <ChatInput />
-            <ChatMessages />
+            <ChatInput 
+              chatMessages = {chatMessages}
+              setChatMessages = {setChatMessages}
+            />
+            <ChatMessages 
+              chatMessages = {chatMessages}
+            />
             
           </>
         );
