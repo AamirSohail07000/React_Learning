@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise 3</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      const container = document.querySelector('.js-container');
+      function App (){
+        function increaseCount(){
+          console.log('clicked');
+        }
+
+        return (
+          <button onClick={increaseCount}>
+            Clicked 0 times
+          </button>
+        );
+      }
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
