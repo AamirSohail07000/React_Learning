@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise 3</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      const container = document.querySelector('.js-container');
+
+      function App() {
+        const [inputText, setInputText] = React.useState('');
+        const [placeholder, setPlaceholder] = React.useState('Type a name here'); // state control for reset button
+       
+
+        function saveInputText(event) {
+          setInputText(event.target.value);
+        }
+        function resetInput(){
+          setInputText("");
+          setPlaceholder("");
+        }
+        function Example(){
+          setInputText("Jason");
+          
+        }    
+
+        return (
+          <>  
+            
+            <input
+              value={inputText}
+              onChange = {saveInputText}
+              placeholder = "Type a name here" 
+            />
+            <button onClick={resetInput}> Reset
+            </button>
+            <button onClick={Example}> Set Example
+            </button>
+            <p>Hello {inputText}</p>
+            
+          </>
+        );
+      }
+
+
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
