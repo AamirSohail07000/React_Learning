@@ -89,6 +89,9 @@
 
         }
         async function sendMessage(){
+
+          setInputText('');
+
           const newChatMessages = [
             ...chatMessages,   //Spread operator
             {
@@ -98,7 +101,7 @@
             }
           ];
 
-          setChatMessages(newChatMessages);
+          setChatMessages([...newChatMessages, {message: 'Loading....', sender: 'robot', id:crypto.randomUUID()}]);
 
           const response = await Chatbot.getResponseAsync(inputText);
           setChatMessages([
