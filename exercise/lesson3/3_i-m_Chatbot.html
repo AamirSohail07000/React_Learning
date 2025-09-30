@@ -83,12 +83,19 @@
 
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState('');
+        const [isLoading, setIsLoading] = React.useState(false);
 
         function saveInputTest(event) {
           setInputText(event.target.value);
 
         }
         async function sendMessage(){
+          if (isLoading || inputText ==='') {
+            return;
+          }
+
+          //Set isLoading to true at the start, and set it to false after everything is done
+          setIsLoading(true);
 
           setInputText('');
 
@@ -113,6 +120,9 @@
             }
           ]);
           setInputText(''); // Remove text in the textbox
+          // Set isLoading to false after everything is done.
+          setIsLoading(false);
+
         }
 
         function handleKeyDown (event) {
