@@ -9,12 +9,14 @@ export function HomePage({cart}) {
   
 
   useEffect(() => {
-    axios.get('/api/products')
-      .then((response) => {
-        setProducts(response.data);
-      });
+    const getHomeData = async() => {
+      const response = await axios.get('/api/products')
+      setProducts(response.data);   
+    };
 
+    getHomeData(); 
   }, []);
+
 // []   Dependency Array lets us control when useEffect runs []= it runs only once
 
   return (
