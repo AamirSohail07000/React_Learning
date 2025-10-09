@@ -1,3 +1,4 @@
+5c
 npx supersimpledev  # Install and run the supersimpledev command.
 
 This will give us instructions on how to use the command.
@@ -10,3 +11,19 @@ npx supersimpledev chatbot "hello chatbot"
 
 The Chatbot will respond with:
 Hello! How can I help you?
+
+5d
+Inside package.json, add 2 npm scripts:
+
+{
+  "scripts": {
+    ...,
+    "mktest": "mkdir test",
+    "rmtest": "rmdir test"
+  },
+}
+
+Run these scripts using:
+
+npm run mktest
+npm run rmtest
